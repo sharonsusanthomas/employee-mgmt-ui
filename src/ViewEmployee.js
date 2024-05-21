@@ -21,6 +21,19 @@ function ViewEmployees() {
         }
     };
 
+    const handleDelete = async (id) => {
+        const confirmDelete = window.confirm('Are you sure you want to delete this employee?');
+        if (confirmDelete) {
+            try {
+                await axios.delete(`http://localhost:8081/deleteEmployee/${id}`);
+                // After successful deletion, fetch the updated list of employees
+                fetchEmployees();
+            } catch (error) {
+                console.error('Error deleting employee:', error);
+            }
+        }
+    };
+
     return (
         <div>
             <h2>View Employees</h2>
@@ -37,7 +50,7 @@ function ViewEmployees() {
                                 <th>Age</th>
                                 <th>Salary</th>
                                 <th>Country</th>
-                                <th>Actions</th> {/* New column for actions */}
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,6 +64,9 @@ function ViewEmployees() {
                                     <td>{employee.country}</td>
                                     <td>
                                         <Link to={`/update-employee/${employee.id}`}>Update</Link>
+                                        {' / '} 
+                                        <button className="delete-button" onClick={() => handleDelete(employee.id)}>Delete</button>
+
                                     </td>
                                 </tr>
                             ))}

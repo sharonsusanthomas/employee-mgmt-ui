@@ -1,60 +1,63 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import validation from './SignupValidation';
-import axios from 'axios'
-
+import axios from 'axios';
+import './Signup.css'; // Import CSS file
 
 function Signup() {
     const [values, setValues] = useState({
-        name:"",
+        name: "",
         email: "",
         password: ""
     });
     const [errors, setErrors] = useState({});
-    const navigate =useNavigate();
+    const navigate = useNavigate();
+
     const handleInput = (event) => {
         setValues(prev => ({ ...prev, [event.target.name]: event.target.value }));
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setErrors(validation(values));
-        if(errors.name === "" && errors.email === "" && errors.password === "")
-            {
-                axios.post('http://localhost:8081/signup',values)
-                .then (res =>{
+        const validationErrors = validation(values);
+        setErrors(validationErrors);
+        
+        // Check if there are no errors
+        if (Object.values(validationErrors).every(error => error === "")) {
+            axios.post('http://localhost:8081/signup', values)
+                .then(res => {
                     navigate('/');
-                } )
+                })
                 .catch(err => console.log(err));
-            }
+        }
     };
+    
 
     return (
-        <div className='d-flex justify-content-center align-items-center bg-primary vh-100'>
-            <div className='bg-white p-3 rounded w-25'>
-                <form action="" onSubmit={handleSubmit}>
-                    <h2>Sign-Up</h2>
-                <div className='mb-3'>
-                        <label htmlFor='name'><strong>Name</strong></label><br />
+        <div className='signup-container'>
+            <div className='signup-form-wrapper'>
+                <form onSubmit={handleSubmit}>
+                    <h2 className='signup-title'>Sign-Up</h2>
+                    <div className='form-group'>
+                        <label htmlFor='name' className='form-label'><strong>Name</strong></label>
                         <input type='name' placeholder='Enter Name' name='name'
-                        onChange={handleInput} className='form-control border rounded-0'/>
-                        {errors.name && <span className='text-danger'>{errors.name}</span>}
+                            onChange={handleInput} className='form-input' />
+                        {errors.name && <span className='error-message'>{errors.name}</span>}
                     </div>
-                    <div className='mb-3'>
-                        <label htmlFor='email'><strong>Email</strong></label><br />
+                    <div className='form-group'>
+                        <label htmlFor='email' className='form-label'><strong>Email</strong></label>
                         <input type='email' placeholder='Enter email' name='email'
-                         onChange={handleInput}className='form-control border rounded-0'/>
-                         {errors.email && <span className='text-danger'>{errors.email}</span>}
+                            onChange={handleInput} className='form-input' />
+                        {errors.email && <span className='error-message'>{errors.email}</span>}
                     </div>
-                    <div className='mb-3'>
-                        <label htmlFor='password'><strong>Password</strong></label><br />
-                        <input type='password' placeholder='Enter Password' 
-                        name='password' onChange={handleInput}className='form-control border rounded-0'/>
-                        {errors.password && <span className='text-danger'>{errors.password}</span>}
+                    <div className='form-group'>
+                        <label htmlFor='password' className='form-label'><strong>Password</strong></label>
+                        <input type='password' placeholder='Enter Password'
+                            name='password' onChange={handleInput} className='form-input' />
+                        {errors.password && <span className='error-message'>{errors.password}</span>}
                     </div>
-                    <button className='btn btn-success w-100 mb-3'>Signup</button>
-                    <p>Aldready have an Account?</p>
-                    <Link to ='/' className='btn btn-light border w-100 rounded-0'>Login</Link>
+                    <button type="submit" className='signup-button'>Signup</button>
+                    <p className='login-link'>Already have an Account? <Link to='/'>Login</Link></p>
                 </form>
             </div>
         </div>

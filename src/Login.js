@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import validation from './LoginValidation';
 import axios from 'axios';
+import './Login.css';
 
 function Login() {
     const [values, setValues] = useState({
@@ -11,6 +12,11 @@ function Login() {
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
 
+    // Update form values when component mounts
+    useEffect(() => {
+        setValues({ email: "", password: "" });
+    }, []);
+
     const handleInput = (event) => {
         setValues(prev => ({ ...prev, [event.target.name]: event.target.value }));
     };
@@ -18,12 +24,14 @@ function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
         setErrors(validation(values));
-
+    
         // Check if there are no errors before making the API call
         if (!errors.email && !errors.password) {
             axios.post('http://localhost:8081/login', values)
                 .then(res => {
                     if (res.data === "success") {
+                        // Reset form values
+                        setValues({ email: "", password: "" });
                         navigate('/Home');
                     } else if (res.data === "no_user") {
                         alert("User does not exist.");
@@ -39,41 +47,44 @@ function Login() {
                 });
         }
     };
-
+    
     return (
-        <div className='d-flex justify-content-center align-items-center bg-primary vh-100'>
-            <div className='bg-white p-3 rounded w-25'>
+        <div className='login-container'>
+            <div className='login-form'>
                 <form onSubmit={handleSubmit}>
                     <h2>Login</h2>
-                    <div className='mb-3'>
-                        <label htmlFor='email'><strong>Email</strong></label><br />
+                    <div className='form-group'>
+                        <label htmlFor='email'><strong>Email</strong></label>
                         <input
                             type='email'
                             placeholder='Enter email'
                             name='email'
+                            value={values.email}
                             onChange={handleInput}
-                            className='form-control border rounded-0'
+                            className='form-control'
                         />
-                        {errors.email && <span className='text-danger'>{errors.email}</span>}
+                        {errors.email && <span className='error-message'>{errors.email}</span>}
                     </div>  
-                    <div className='mb-3'>
-                        <label htmlFor='password'><strong>Password</strong></label><br />
+                    <div className='form-group'>
+                        <label htmlFor='password'><strong>Password</strong></label>
                         <input
                             type='password'
                             placeholder='Enter Password'
                             name='password'
+                            value={values.password}
                             onChange={handleInput}
-                            className='form-control border rounded-0'
+                            className='form-control'
                         />
-                        {errors.password && <span className='text-danger'>{errors.password}</span>}
+                        {errors.password && <span className='error-message'>{errors.password}</span>}
                     </div>
-                    <button type='submit' className='btn btn-success w-100 mb-3'>Login</button>
+                    <button type='submit' className='btn btn-success'>Login</button>
                     <p>Have not Created An Account Yet?</p>
-                    <Link to='/signup' className='btn btn-light border w-100 rounded-0'>Create Account</Link>
+                    <Link to='/signup' className='btn btn-light'>Create Account</Link>
                 </form>
             </div>
         </div>
     );
+    
 }
 
 export default Login;

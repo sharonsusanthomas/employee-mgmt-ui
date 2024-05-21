@@ -16,7 +16,7 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/Home' element={<Home />} />
           <Route path='/add-employee' element={<AddEmployee />} /> {/* Update path to match the casing */}
-          <Route path='/update-employee' element={<UpdateEmployee />} /> {/* Define the UpdateEmployee route */}
+          <Route path='/update-employee/:id' element={<UpdateEmployee />} /> {/* Define the UpdateEmployee route */}
           <Route path='/view-employees' element={<ViewEmployee />} /> {/* Define the ViewEmployee route */}
         </Routes>
       </BrowserRouter>

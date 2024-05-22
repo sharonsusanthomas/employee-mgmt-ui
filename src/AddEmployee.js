@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Header from './Header'; // Import the Header component
-import Footer from './Footer'; // Import the Footer component
-import './AddEmployee.css'; // Import the CSS file
+import Header from './Header';
+import Footer from './Footer';
+import './AddEmployee.css';
 
 function AddEmployee() {
     const [employee, setEmployee] = useState({
@@ -12,15 +12,26 @@ function AddEmployee() {
         email: '',
         age: '',
         salary: '',
-        country: '',
-        added_by: ''
+        country: ''
     });
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
+    // Fetch logged-in user's name from local storage
+    const addedBy = localStorage.getItem('userName');
+
+    useEffect(() => {
+        if (addedBy) {
+            setEmployee(prevState => ({
+                ...prevState,
+                added_by: addedBy
+            }));
+        }
+    }, [addedBy]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setEmployee((prevState) => ({
+        setEmployee(prevState => ({
             ...prevState,
             [name]: value
         }));
@@ -31,26 +42,24 @@ function AddEmployee() {
         axios.post('http://localhost:8081/addEmployee', employee)
             .then(response => {
                 setSuccessMessage('Employee added successfully!');
-                // Reset the form fields
                 setEmployee({
                     name: '',
                     ph: '',
                     email: '',
                     age: '',
                     salary: '',
-                    country: '',
-                    added_by: ''
+                    country: ''
                 });
             })
             .catch(error => {
-                console.error('There was an error adding the employee!', error);
+                console.error('Error adding employee:', error);
                 setError('Error adding employee. Please try again.');
             });
     };
 
     return (
         <div>
-            <Header /> {/* Include the Header component */}
+            <Header />
             <div className="add-employee-container">
                 <h2>Add Employee</h2>
                 {error && <p className="error-message">{error}</p>}
@@ -130,6 +139,9 @@ function AddEmployee() {
                                 className="form-control"
                             />
                         </div>
+                    </div>
+                    <div className="form-group-row">
+                        
                         <div className="form-group">
                             <label>Added By:</label>
                             <input
@@ -139,6 +151,7 @@ function AddEmployee() {
                                 onChange={handleChange}
                                 required
                                 className="form-control"
+                                disabled // Disable input field to prevent modification
                             />
                         </div>
                     </div>
@@ -148,7 +161,7 @@ function AddEmployee() {
                 <Link to="/home" className="btn btn-secondary">Back to Home</Link>
             </div>
             <br></br><br></br><br></br><br></br>
-            <Footer /> {/* Include the Footer component */}
+            <Footer />
         </div>
     );
 }

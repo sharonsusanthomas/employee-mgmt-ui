@@ -12,7 +12,42 @@
     color: black;
     
   }
-  
+  /* Header.css */
+
+/* Styles for the header */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* Styles for the navigation links */
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+/* Styles for the logout button */
+nav button {
+  background-color: #00cb0a; /* Red color */
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+nav button:hover {
+  background-color: #c82333; /* Darker red color on hover */
+}
+
   .home-overlay {
     position: absolute;
     top: 0;

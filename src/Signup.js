@@ -4,7 +4,7 @@ import validation from './SignupValidation';
 import axios from 'axios';
 import './Signup.css'; // Import CSS file
 
-function Signup({ handleFlip }) {
+function Signup() {
 
     const [values, setValues] = useState({
         name: "",

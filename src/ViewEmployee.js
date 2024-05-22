@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './ViewEmployee.css'; // Import the CSS file
-import Header from './Header'; // Import the Header component
+import './ViewEmployee.css';
+import Header from './Header';
 import Footer from './Footer';
 
 function ViewEmployees() {
@@ -52,6 +52,7 @@ function ViewEmployees() {
                                 <th>Age</th>
                                 <th>Salary</th>
                                 <th>Country</th>
+                                <th>Added By</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -64,6 +65,7 @@ function ViewEmployees() {
                                     <td>{employee.age}</td>
                                     <td>{employee.salary}</td>
                                     <td>{employee.country}</td>
+                                    <td>{employee.added_by}</td>
                                     <td>
                                         <Link to={`/update-employee/${employee.id}`}>Update</Link>
                                         {' / '}

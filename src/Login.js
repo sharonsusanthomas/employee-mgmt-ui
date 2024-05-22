@@ -30,8 +30,11 @@ function Login() {
             axios.post('http://localhost:8081/login', values)
                 .then(res => {
                     if (res.data === "success") {
+                        // Save user's name in local storage
+                        localStorage.setItem('userName', values.email);
                         // Reset form values
                         setValues({ email: "", password: "" });
+                        // Redirect to home page
                         navigate('/Home');
                     } else if (res.data === "no_user") {
                         alert("User does not exist.");
@@ -47,6 +50,7 @@ function Login() {
                 });
         }
     };
+    
     
     return (
         <div className='login-container'>

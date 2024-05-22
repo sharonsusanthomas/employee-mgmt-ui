@@ -1,70 +1,73 @@
-
-/* Style for the outer container */
 .signup-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full height of viewport */
+    height: 100vh;
+    background-image: url('background.jpg');
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the image */
 }
 
-/* Style for the form wrapper */
 .signup-form-wrapper {
-    background-color: #ffffff; /* White background */
+    width: 400px;
     padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.8); /* Add some transparency */
 }
 
-/* Style for form title */
 .signup-title {
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Style for form fields */
-.form-input {
-    width: 100%;
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
     margin-bottom: 5px;
-    padding: 5px;
+    text-align: left; /* Align label to the left */
+}
+
+.form-input {
+    width: calc(100% - 12px); /* Set input field width to 100% minus the width of the label */
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box;
+    margin-bottom: 10px; /* Add some margin-bottom */
 }
 
-/* Style for error messages */
 .error-message {
-    color: #ff0000; /* Red color */
-    font-size: 12px;
-    margin-top: 5px;
+    color: red;
+    font-size: 14px;
 }
 
-/* Style for the signup button */
 .signup-button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff; /* Blue color */
+    background-color: #007bff;
     border: none;
     border-radius: 5px;
-    color: #ffffff; /* White color */
+    color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .signup-button:hover {
-    background-color: #0056b3; /* Darker blue color on hover */
+    background-color: #0056b3;
 }
 
-/* Style for the login link */
 .login-link {
-    display: block;
     text-align: center;
-    margin-top: 10px;
-    color: #007bff; /* Blue color */
+    margin-top: 20px;
+}
+
+.login-link a {
+    color: #007bff;
     text-decoration: none;
 }
 
-.login-link:hover {
-    text-decoration: underline; /* Underline on hover */
+.login-link a:hover {
+    text-decoration: underline;
 }
-

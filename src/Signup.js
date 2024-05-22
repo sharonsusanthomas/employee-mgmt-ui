@@ -4,7 +4,8 @@ import validation from './SignupValidation';
 import axios from 'axios';
 import './Signup.css'; // Import CSS file
 
-function Signup() {
+function Signup({ handleFlip }) {
+
     const [values, setValues] = useState({
         name: "",
         email: "",
@@ -26,7 +27,7 @@ function Signup() {
         if (Object.values(validationErrors).every(error => error === "")) {
             axios.post('http://localhost:8081/signup', values)
                 .then(res => {
-                    navigate('/');
+                    navigate('/login');
                 })
                 .catch(err => console.log(err));
         }
@@ -57,7 +58,7 @@ function Signup() {
                         {errors.password && <span className='error-message'>{errors.password}</span>}
                     </div>
                     <button type="submit" className='signup-button'>Signup</button>
-                    <p className='login-link'>Already have an Account? <Link to='/'>Login</Link></p>
+                    <p className='login-link'>Already have an Account? <Link to='/login'>Login</Link></p>
                 </form>
             </div>
         </div>

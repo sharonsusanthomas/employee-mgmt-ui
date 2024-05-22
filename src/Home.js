@@ -12,9 +12,9 @@ function Home() {
             <div className="home-content">
                 <h1>Employee Management System</h1>
                 <p>Manage your company's employee information efficiently!</p>
-                <br />
-                <Link to="/" className="btn btn-primary">Get Started</Link>
             </div>
+        
+            
             <div className="features">
                 <div className="feature">
                     <img src={addImage} alt="Add Employee" className="feature-image" />
@@ -30,7 +30,8 @@ function Home() {
                     <Link to="/view-employees" className="btn btn-secondary">View Employees</Link>
                 </div>
             </div>
-        </div>
+            </div>
+        
     );
 }
 

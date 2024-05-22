@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './ViewEmployee.css'; // Import the CSS file
+import Header from './Header'; // Import the Header component
+import Footer from './Footer';
 
 function ViewEmployees() {
     const [employees, setEmployees] = useState([]);
@@ -26,8 +28,7 @@ function ViewEmployees() {
         if (confirmDelete) {
             try {
                 await axios.delete(`http://localhost:8081/deleteEmployee/${id}`);
-                // After successful deletion, fetch the updated list of employees
-                fetchEmployees();
+                fetchEmployees(); // Fetch updated list after deletion
             } catch (error) {
                 console.error('Error deleting employee:', error);
             }
@@ -36,6 +37,7 @@ function ViewEmployees() {
 
     return (
         <div>
+            <Header />
             <h2>View Employees</h2>
             {loading ? (
                 <p>Loading...</p>
@@ -64,9 +66,8 @@ function ViewEmployees() {
                                     <td>{employee.country}</td>
                                     <td>
                                         <Link to={`/update-employee/${employee.id}`}>Update</Link>
-                                        {' / '} 
+                                        {' / '}
                                         <button className="delete-button" onClick={() => handleDelete(employee.id)}>Delete</button>
-
                                     </td>
                                 </tr>
                             ))}
@@ -75,8 +76,11 @@ function ViewEmployees() {
                     <Link to="/home" className="btn btn-primary">Back to Home</Link>
                 </div>
             )}
+            <Footer/>
         </div>
+        
     );
+    
 }
 
 export default ViewEmployees;

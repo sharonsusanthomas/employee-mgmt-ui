@@ -8,7 +8,7 @@ import './AddEmployee.css';
 function AddEmployee() {
     const [employee, setEmployee] = useState({
         name: '',
-        ph: '',
+        phno: '',
         email: '',
         age: '',
         salary: '',
@@ -44,7 +44,7 @@ function AddEmployee() {
                 setSuccessMessage('Employee added successfully!');
                 setEmployee({
                     name: '',
-                    ph: '',
+                    phno: '',
                     email: '',
                     age: '',
                     salary: '',
@@ -81,8 +81,8 @@ function AddEmployee() {
                             <label>Phone Number:</label>
                             <input
                                 type="text"
-                                name="ph"
-                                value={employee.ph}
+                                name="phno"
+                                value={employee.phno}
                                 onChange={handleChange}
                                 required
                                 pattern="[0-9]{10}"
@@ -154,6 +154,49 @@ function AddEmployee() {
                                 disabled // Disable input field to prevent modification
                             />
                         </div>
+                    </div>
+                    <div className="form-group-row">
+                        <div className="form-group">
+                            <label>Username:</label>
+                            <input
+                                type="text"
+                                name="username"
+                                value={employee.username}
+                                onChange={handleChange}
+                                required
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Password:</label>
+                            <input
+                                 type="password"
+                                 name="password"
+                                 value={employee.password}
+                                 onChange={handleChange}
+                                 required
+                                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                 title="Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character."
+                                 className="form-control"
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label>Classification:</label>
+                               <select
+                                 name="classification"
+                                  value={employee.classification}
+                                  onChange={handleChange}
+                                 required
+                                  className="form-control"
+                                >
+                            <option value="">Select Classification</option>
+                            <option value="admin">Admin</option>
+                            <option value="employee">Employee</option>
+                            <option value="faculty">Faculty</option>
+                         </select>
+                        </div>
+
                     </div>
                     <button type="submit" className="btn btn-primary">Add Employee</button>
                 </form>

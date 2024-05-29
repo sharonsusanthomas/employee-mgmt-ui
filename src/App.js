@@ -7,6 +7,9 @@ import AddEmployee from './AddEmployee'; // Correct the filename casing
 import UpdateEmployee from './UpdateEmployee'; // Import the UpdateEmployee component
 import ViewEmployee from './ViewEmployee'; // Import the ViewEmployee component
 import Init from './Init';
+import Logs from './EmployeeLogs';
+import Profile from './ProfilePage';
+import Employeehome from './Employeehome'
 
 function App() {
   return (
@@ -20,6 +23,11 @@ function App() {
           <Route path='/add-employee' element={<AddEmployee />} /> {/* Update path to match the casing */}
           <Route path='/update-employee/:id' element={<UpdateEmployee />} /> {/* Define the UpdateEmployee route */}
           <Route path='/view-employees' element={<ViewEmployee />} /> {/* Define the ViewEmployee route */}
+          <Route path='/employeelogs' element={<Logs/>} /> {/* Define the ViewEmployee route */}
+          <Route path="/profile" element={<Profile/>}  />
+          <Route path='/Employeehome' element={<Employeehome />} /> {/* Define the UpdateEmployee route */}
+
+          
         </Routes>
       </BrowserRouter>
     </div>

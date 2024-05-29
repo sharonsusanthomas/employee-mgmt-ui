@@ -1,6 +1,7 @@
 /* Footer.css */
 footer {
-    background-color:#1675c7;
+    /* background-color:#1675c7; */
+    background-color: #333;
     padding: 20px;
     text-align: center;
     position: fixed;

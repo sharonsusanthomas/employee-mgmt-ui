@@ -1,0 +1,72 @@
+.employee-home {
+    display: flex;
+}
+
+.profile-sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    transition: left 0.3s;
+}
+
+.profile-sidebar.open {
+    left: 0;
+}
+
+.profile-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.close-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    float: right;
+}
+
+.main-content {
+    margin-left: 270px;
+    padding: 20px;
+    flex: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-events {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.events-section, .missing-docs-section, .collaborations-section {
+    margin-top: 20px;
+}
+
+.events-section ul, .missing-docs-section ul, .collaborations-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.events-section li, .missing-docs-section li, .collaborations-section li {
+    background-color: #f1f1f1;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}

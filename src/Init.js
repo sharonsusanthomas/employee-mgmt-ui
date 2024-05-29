@@ -4,7 +4,7 @@ import './Home.css';
 import addImage from './add.png';
 import updateImage from './update.jpg';
 import viewImage from './view.jpg';
-import backgroundImage from './background.jpg';
+// import backgroundImage from './background.jpg';
 
 function Init() {
     return (

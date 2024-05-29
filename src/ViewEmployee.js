@@ -60,12 +60,12 @@ function ViewEmployees() {
                             {employees.map((employee, index) => (
                                 <tr key={index}>
                                     <td>{employee.name}</td>
-                                    <td>{employee.ph}</td>
+                                    <td>{employee.phno}</td>
                                     <td>{employee.email}</td>
                                     <td>{employee.age}</td>
                                     <td>{employee.salary}</td>
                                     <td>{employee.country}</td>
-                                    <td>{employee.added_by}</td>
+                                    <td>{employee.addedby}</td>
                                     <td>
                                         <Link to={`/update-employee/${employee.id}`}>Update</Link>
                                         {' / '}

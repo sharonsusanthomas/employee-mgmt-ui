@@ -6,7 +6,7 @@ import './Login.css';
 
 function Login() {
     const [values, setValues] = useState({
-        email: "",
+        username: "",
         password: ""
     });
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ function Login() {
 
     // Update form values when component mounts
     useEffect(() => {
-        setValues({ email: "", password: "" });
+        setValues({ username: "", password: "" });
     }, []);
 
     const handleInput = (event) => {
@@ -26,20 +26,27 @@ function Login() {
         setErrors(validation(values));
     
         // Check if there are no errors before making the API call
-        if (!errors.email && !errors.password) {
+        if (!errors.username && !errors.password) {
             axios.post('http://localhost:8081/login', values)
                 .then(res => {
-                    if (res.data === "success") {
+                    const { status, isAdmin } = res.data;
+                    if (status === "success") {
                         // Save user's name in local storage
-                        localStorage.setItem('userName', values.email);
+                        localStorage.setItem('userName', values.username);
                         // Reset form values
-                        setValues({ email: "", password: "" });
-                        // Redirect to home page
-                        navigate('/Home');
-                    } else if (res.data === "no_user") {
+                        setValues({ username: "", password: "" });
+                        // Redirect based on admin status
+                        if (isAdmin) {
+                            navigate('/Home');
+                        } else {
+                            navigate('/Employeehome');
+                        }
+                    } else if (status === "no_user") {
                         alert("User does not exist.");
-                    } else if (res.data === "wrong_password") {
+                    } else if (status === "wrong_password") {
                         alert("Password does not match.");
+                    } else if (status === "inactive_user") {
+                        alert("Your access is denied. Your account is inactive.");
                     } else {
                         alert("An error occurred. Please try again.");
                     }
@@ -51,23 +58,22 @@ function Login() {
         }
     };
     
-    
     return (
         <div className='login-container'>
             <div className='login-form'>
                 <form onSubmit={handleSubmit}>
                     <h2>Login</h2>
                     <div className='form-group'>
-                        <label htmlFor='email'><strong>Email</strong></label>
+                        <label htmlFor='username'><strong>Username</strong></label>
                         <input
-                            type='email'
-                            placeholder='Enter email'
-                            name='email'
-                            value={values.email}
+                            type='username'
+                            placeholder='Enter Username'
+                            name='username'
+                            value={values.username}
                             onChange={handleInput}
                             className='form-control'
                         />
-                        {errors.email && <span className='error-message'>{errors.email}</span>}
+                        {errors.username && <span className='error-message'>{errors.username}</span>}
                     </div>  
                     <div className='form-group'>
                         <label htmlFor='password'><strong>Password</strong></label>
@@ -82,13 +88,11 @@ function Login() {
                         {errors.password && <span className='error-message'>{errors.password}</span>}
                     </div>
                     <button type='submit' className='btn btn-success'>Login</button>
-                    <p>Have not Created An Account Yet?</p>
-                    <Link to='/signup' className='btn btn-light'>Create Account</Link>
+                    
                 </form>
             </div>
         </div>
     );
-    
 }
 
 export default Login;

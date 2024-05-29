@@ -8,7 +8,7 @@ function UpdateEmployee() {
     const navigate = useNavigate();
     const [employee, setEmployee] = useState({
         name: '',
-        ph: '',
+        phno: '',
         email: '',
         age: '',
         salary: '',
@@ -67,8 +67,8 @@ function UpdateEmployee() {
                         <label>Phone:</label>
                         <input
                             type="text"
-                            name="ph"
-                            value={employee.ph}
+                            name="phno"
+                            value={employee.phno}
                             onChange={handleChange}
                             className="input-shade2"
                             required
@@ -120,8 +120,27 @@ function UpdateEmployee() {
                             required
                         />
                     </div>
+                    
                 </div>
-                <button type="submit">Update Employee</button>
+                <div className="form-group-row">
+                <div className="form-group">
+                         <label>Classification:</label>
+                            <select
+                                    name="classification"
+                                    value={employee.classification}
+                                    onChange={handleChange}
+                                    className="input-shade1"  
+                                    required
+                            >
+                            <option value="">Select Classification</option>
+                            <option value="admin">Admin</option>
+                            <option value="employee">Employee</option>
+                            <option value="faculty">Faculty</option>
+                            </select>
+                    </div>
+                    <button type="submit">Update Employee</button>
+                    </div>
+                
             </form>
             <br />
             <Link to="/view-employees" className="btn btn-primary">Back to view</Link>

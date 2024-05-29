@@ -1,26 +1,80 @@
-header {
-    background-color: #1675c7;
-    padding: 10px;
-    text-align: center;
-    color: white;
-}
+/* Header.css */
 
-header h1 {
-    margin: 0;
-    font-size: 24px;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #003366; /* Change this to your desired color */
+    color: white; /* Ensure text is visible on dark background */
 }
 
 nav {
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
 }
 
 nav a {
-    color: white;
+    margin-right: 1rem;
     text-decoration: none;
-    margin: 0 15px;
-    font-size: 16px;
+    color: #ffffff; /* Ensure links are visible on dark background */
 }
 
-nav a:hover {
-    text-decoration: underline;
+nav button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.profile-section {
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.profile-section span {
+    margin-right: 0.5rem;
+    color: #ffffff; /* Ensure text is visible on dark background */
+}
+
+/* Side navigation */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a, .sidenav button {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.sidenav a:hover, .sidenav button:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
 }
